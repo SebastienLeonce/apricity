@@ -7,7 +7,7 @@ export class PeopleService implements IService<People> {
             .createQueryBuilder(People, 'people')
             .select('people.' + column + ' AS value')
             .addSelect('COUNT(*) AS count')
-            .addSelect('AVG(people.age) AS average_age')
+            .addSelect('round(AVG(people.age) - 0.5) AS average_age')
             .groupBy('people.' + column + '')
             .orderBy('count', 'DESC')
             .getRawMany();
