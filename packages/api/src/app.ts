@@ -1,4 +1,6 @@
 import express from 'express';
+import 'reflect-metadata';
+import { AppDataSource } from './lib/database';
 
 class App {
     public app: express.Application;
@@ -9,6 +11,7 @@ class App {
         this.port = port;
 
         this.loadMiddlewares();
+        this.loadDataBase();
     }
 
     public listen() {
@@ -23,6 +26,17 @@ class App {
 
     private loadMiddlewares() {
         this.app.use(express.json());
+    }
+
+    private loadDataBase() {
+        AppDataSource.initialize()
+            .then(() => {
+                console.log('Database initialized');
+            })
+            .catch((error: Error) => {
+                console.warn('Database initialization failed');
+                console.error(error);
+            });
     }
 }
 
