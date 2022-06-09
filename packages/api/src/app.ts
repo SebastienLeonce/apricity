@@ -1,16 +1,18 @@
 import express from 'express';
 import 'reflect-metadata';
+import { Route } from './interfaces/route.interface';
 import { AppDataSource } from './lib/database';
 
 class App {
     public app: express.Application;
     public port: number;
 
-    constructor(port: number) {
+    constructor(port: number, routes: Route[]) {
         this.app = express();
         this.port = port;
 
         this.loadMiddlewares();
+        this.loadRoutes(routes);
         this.loadDataBase();
     }
 
@@ -26,6 +28,12 @@ class App {
 
     private loadMiddlewares() {
         this.app.use(express.json());
+    }
+
+    private loadRoutes(routes: Route[]) {
+        routes.forEach(route => {
+            this.app.use(route.path, route.router);
+        });
     }
 
     private loadDataBase() {
