@@ -1,0 +1,15 @@
+{
+  "name": "@apricity/root",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "yarn workspaces foreach -p run dev",
+    "build": "yarn workspaces foreach -pt run build"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "packageManager": "yarn@3.2.1"
+}
