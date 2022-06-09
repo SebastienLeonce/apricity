@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express from 'express';
 import 'reflect-metadata';
 import { Route } from './interfaces/route.interface';
@@ -28,10 +29,11 @@ class App {
 
     private loadMiddlewares() {
         this.app.use(express.json());
+        this.app.use(cors());
     }
 
     private loadRoutes(routes: Route[]) {
-        routes.forEach(route => {
+        routes.forEach((route) => {
             this.app.use(route.path, route.router);
         });
     }
