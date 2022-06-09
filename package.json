@@ -7,13 +7,15 @@
     "scripts": {
         "dev": "yarn workspaces foreach -p run dev",
         "build": "yarn workspaces foreach -pt run build",
-        "prettier": "prettier --write ."
+        "prettier": "prettier --write .",
+        "lint": "yarn workspaces foreach run lint"
     },
     "workspaces": [
         "packages/*"
     ],
     "packageManager": "yarn@3.2.1",
     "devDependencies": {
+        "eslint": "^8.17.0",
         "prettier": "^2.6.2"
     }
 }

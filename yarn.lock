@@ -78,6 +78,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@apricity/root@workspace:."
   dependencies:
+    eslint: ^8.17.0
     prettier: ^2.6.2
   languageName: unknown
   linkType: soft
@@ -6075,7 +6076,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.3.0":
+"eslint@npm:^8.17.0, eslint@npm:^8.3.0":
   version: 8.17.0
   resolution: "eslint@npm:8.17.0"
   dependencies:
