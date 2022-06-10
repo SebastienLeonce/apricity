@@ -3,6 +3,7 @@ import express from 'express';
 import 'reflect-metadata';
 import { Route } from './interfaces/route.interface';
 import { AppDataSource } from './lib/database';
+import { ErrorMiddleware } from './middlewares/error.middleware';
 
 class App {
     public app: express.Application;
@@ -14,6 +15,7 @@ class App {
 
         this.loadMiddlewares();
         this.loadRoutes(routes);
+        this.loadErrorHandlers();
         this.loadDataBase();
     }
 
@@ -47,6 +49,13 @@ class App {
                 console.warn('Database initialization failed');
                 console.error(error);
             });
+    }
+
+    private loadErrorHandlers() {
+        this.app.use((req, res) =>
+            res.status(404).json({ message: 'Not found' })
+        );
+        this.app.use(ErrorMiddleware);
     }
 }
 
