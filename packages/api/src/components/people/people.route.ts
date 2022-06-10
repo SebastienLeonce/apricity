@@ -14,5 +14,6 @@ export class PeopleRoute implements Route {
 
     private loadRoutes() {
         this.router.get('/', this.peopleController.getAll);
+        this.router.get('/category', this.peopleController.getCategory);
     }
 }

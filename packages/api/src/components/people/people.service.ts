@@ -7,9 +7,15 @@ export class PeopleService implements IService<People> {
             .createQueryBuilder(People, 'people')
             .select('people.' + column + ' AS value')
             .addSelect('COUNT(*) AS count')
-            .addSelect('round(AVG(people.age) - 0.5) AS average_age')
+            .addSelect('round(AVG(people.age), 1) AS average_age')
             .groupBy('people.' + column + '')
             .orderBy('count', 'DESC')
             .getRawMany();
+    }
+
+    public async getCategory(): Promise<string[]> {
+        return AppDataSource.getMetadata(People)
+            .columns.map((column) => column.databaseName)
+            .slice(1);
     }
 }

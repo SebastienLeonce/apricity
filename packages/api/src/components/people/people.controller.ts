@@ -19,6 +19,18 @@ export class PeopleController {
             next(error);
         }
     };
+
+    public getCategory = async (
+        _req: Request,
+        res: Response,
+        next: NextFunction
+    ) => {
+        try {
+            res.status(200).json(await this.peopleService.getCategory());
+        } catch (error) {
+            next(error);
+        }
+    };
 }
 
 export default PeopleController;
