@@ -10,7 +10,6 @@ export class PeopleController {
             const { category } = req.query as { category: string };
 
             if (category) {
-                console.log(category);
                 res.status(200).json(
                     await this.peopleService.getByCategoryAndCount(category)
                 );

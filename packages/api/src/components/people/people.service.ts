@@ -1,8 +1,8 @@
-import { IService } from '../../interfaces/service.interface';
 import { AppDataSource, People } from '../../lib/database';
+import { category, data } from './people.dto';
 
-export class PeopleService implements IService<People> {
-    public async getByCategoryAndCount(column: string): Promise<People[]> {
+export class PeopleService {
+    public async getByCategoryAndCount(column: category): Promise<data[]> {
         return AppDataSource.manager
             .createQueryBuilder(People, 'people')
             .select('people.' + column + ' AS value')
@@ -13,7 +13,7 @@ export class PeopleService implements IService<People> {
             .getRawMany();
     }
 
-    public async getCategory(): Promise<string[]> {
+    public async getCategory(): Promise<category[]> {
         return AppDataSource.getMetadata(People)
             .columns.map((column) => column.databaseName)
             .slice(1);
