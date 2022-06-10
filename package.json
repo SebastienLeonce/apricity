@@ -9,6 +9,7 @@
         "build": "yarn workspaces foreach -pt run build",
         "prettier": "prettier --write .",
         "lint": "yarn workspaces foreach run lint",
+        "test": "yarn workspaces foreach run test",
         "prepare": "husky install"
     },
     "workspaces": [
