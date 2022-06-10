@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { HttpException } from '../../exceptions/HttpException';
 import { PeopleService } from './people.service';
 
 export class PeopleController {
@@ -9,14 +10,15 @@ export class PeopleController {
             const { category } = req.query as { category: string };
 
             if (category) {
+                console.log(category);
                 res.status(200).json(
                     await this.peopleService.getByCategoryAndCount(category)
                 );
             } else {
-                next('ERRRROOORRRR');
+                next(new HttpException(400, 'Bad request'));
             }
         } catch (error) {
-            next(error);
+            next(new HttpException(404, 'Not found'));
         }
     };
 

@@ -41,14 +41,16 @@ class App {
     }
 
     private loadDataBase() {
-        AppDataSource.initialize()
-            .then(() => {
-                console.log('Database initialized');
-            })
-            .catch((error: Error) => {
-                console.warn('Database initialization failed');
-                console.error(error);
-            });
+        if (!AppDataSource.isInitialized) {
+            AppDataSource.initialize()
+                .then(() => {
+                    console.log('Database initialized');
+                })
+                .catch((error: Error) => {
+                    console.warn('Database initialization failed');
+                    console.error(error);
+                });
+        }
     }
 
     private loadErrorHandlers() {
